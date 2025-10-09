@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="ru">
+    
+        
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bug Bounty Dashboard - @vladpi</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+            rel="stylesheet"
+        />
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            mono: ["Fira Code"],
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                font-family: "Fira Code", monospace;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 text-gray-900 font-mono">
+        <div class="container mx-auto px-4 py-8">
+            <header class="mb-8">
+                <div class="flex items-center justify-center mb-6">
+                    <div class="flex items-center space-x-4">
+                        
+                        <img
+                            src="static/avatar.png"
+                            alt="avatar"
+                            class="w-24 h-24 rounded-full border-2 border-gray-300"
+                        />
+                        
+                        <div>
+                            <h1 class="text-4xl font-semibold">
+                                Bug Bounty Stats
+                            </h1>
+                            <span class="text-xl text-gray-600">
+                                @vladpi
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center space-x-6 mb-4">
+                    
+                    <a
+                        href="https://road_to_ipoteka.t.me"
+                        target="_blank"
+                        class="flex items-center space-x-2 text-sky-600 hover:text-sky-600/70 transition-colors"
+                    >
+                        <img src="static/telegram.ico" class="w-5 h-5" />
+                        <span>Telegram</span>
+                    </a>
+                    
+                    
+                    <a
+                        href="https://bugbounty.bi.zone/profile/vladpi/hackactivity"
+                        target="_blank"
+                        class="flex items-center space-x-2 text-sky-600 hover:text-sky-600/70 transition-colors"
+                    >
+                        <img src="static/bizone.ico" class="w-5 h-5" />
+                        <span>BI.ZONE</span>
+                    </a>
+                    
+                    
+                    <a
+                        href="https://standoff365.com/profile/vladpi/"
+                        target="_blank"
+                        class="flex items-center space-x-2 text-black-600 hover:text-gray-900/70 transition-colors"
+                    >
+                        <img src="static/standoff365.ico" class="w-5 h-5" />
+                        <span>Standoff365</span>
+                    </a>
+                    
+                </div>
+            </header>
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+            >
+                <div
+                    class="bg-white p-6 rounded-lg shadow border-l-4 border-sky-500"
+                >
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">
+                        Сумма выплат
+                    </h3>
+                    <p class="text-2xl font-semibold text-sky-600">
+                        1 456 277.0 ₽
+                    </p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-lg shadow border-l-4 border-sky-500"
+                >
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">
+                        Всего отчетов
+                    </h3>
+                    <p class="text-2xl font-semibold text-sky-600">
+                        33
+                    </p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-lg shadow border-l-4 border-sky-500"
+                >
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">
+                        Принято
+                    </h3>
+                    <p class="text-2xl font-semibold text-sky-600">
+                        22
+                    </p>
+                </div>
+                <div
+                    class="bg-white p-6 rounded-lg shadow border-l-4 border-sky-500"
+                >
+                    <h3 class="text-sm font-medium text-gray-500 uppercase">
+                        % принятых
+                    </h3>
+                    <p class="text-2xl font-semibold text-sky-600">
+                        66%
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Отчеты по месяцам
+                    </h2>
+                    <canvas id="monthlyReportsChart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Уникальные программы по месяцам
+                    </h2>
+                    <canvas id="monthlyProgramsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Выплаты по месяцам
+                    </h2>
+                    <canvas id="monthlyPayoutsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Распределение по статусу
+                    </h2>
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Распределение по уровню
+                    </h2>
+                    <canvas id="severityChart"></canvas>
+                </div>
+                <!-- <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Распределение по площадке
+                    </h2>
+                    <canvas id="platformChart"></canvas>
+                </div> -->
+                <div class="col-span-2 bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Активность vs доход по площадке
+                    </h2>
+                    <canvas id="platformActivityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Топ программы (по отчетам)
+                    </h2>
+                    <canvas id="topProgramsChart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Топ программы (по выплатам)
+                    </h2>
+                    <canvas id="topProgramsPayoutChart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Принятие по типу отчета
+                    </h2>
+                    <canvas id="acceptanceChart"></canvas>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">
+                        Средняя выплата по уровню
+                    </h2>
+                    <canvas id="avgPayoutSeverityChart"></canvas>
+                </div>
+            </div>
+
+            <footer>
+                <p class="text-right text-gray-400">
+                    Сгенерировано при помощи <a class="hover:underline text-blue-400" href="https://github.com/vladpi/bugbounty-stats">Bug Bounty Stats</a> – 09.10.2025
+                </p>
+            </footer>
+        </div>
+
+        <script>
+            const colors = {
+                // Основные цвета
+                primary: "#0284C7", // sky-600
+                secondary: "#059669", // emerald-600
+
+                // Системные цвета
+                textMuted: "#64748B", // slate-500
+                border: "#E2E8F0", // slate-200
+
+                // Статусные цвета (приглушенные)
+                success: "#059669", // emerald-600
+                danger: "#DC2626", // red-600
+                info: "#0284C7", // sky-600
+            };
+
+            const severityColors = {
+                critical: "#DC2626", // red-600
+                high: "#EA580C", // orange-600
+                medium: "#D97706", // amber-600
+                low: "#059669", // emerald-600
+            };
+
+            const severityToColor = {
+                critical: severityColors.critical,
+                high: severityColors.high,
+                medium: severityColors.medium,
+                low: severityColors.low,
+            };
+
+            // Минималистичная палитра для общих графиков (приглушенные тона)
+            const chartColors = [
+                "#0284C7", // sky-600
+                "#059669", // emerald-600
+                "#D97706", // amber-600
+                "#7C3AED", // violet-600
+                "#0891B2", // cyan-600
+            ];
+
+            Chart.defaults.font.family = "Fira Code";
+
+            const lineChartOptions = {
+                responsive: true,
+                aspectRatio: 2,
+                interaction: {
+                    intersect: false,
+                    mode: "index",
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: colors.border,
+                        },
+                        ticks: {
+                            color: colors.textMuted,
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: colors.border,
+                        },
+                        ticks: {
+                            color: colors.textMuted,
+                        },
+                    },
+                },
+            };
+
+            const doughnutChartOptions = {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            color: colors.textMuted,
+                            usePointStyle: true,
+                            padding: 10,
+                        },
+                    },
+                },
+            };
+
+            // Monthly Reports Chart
+            u = new Chart(document.getElementById("monthlyReportsChart"), {
+                type: "line",
+                data: {
+                    labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09"],
+                    datasets: [
+                        {
+                            label: "Отчеты",
+                            data: [1, 3, 1, 0, 0, 0, 0, 0, 0, 3, 6, 5, 5, 2, 4, 3],
+                            borderColor: colors.primary,
+                            backgroundColor: colors.primary + "20",
+                            pointBackgroundColor: colors.primary,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                    ],
+                },
+                options: lineChartOptions,
+            });
+
+            // Monthly Programs Chart
+            new Chart(document.getElementById("monthlyProgramsChart"), {
+                type: "line",
+                data: {
+                    labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09"],
+                    datasets: [
+                        {
+                            label: "Уникальные программы",
+                            data: [1, 2, 1, 0, 0, 0, 0, 0, 0, 2, 3, 2, 2, 2, 2, 1],
+                            borderColor: colors.primary,
+                            backgroundColor: colors.primary + "20",
+                            pointBackgroundColor: colors.primary,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                    ],
+                },
+                options: lineChartOptions,
+            });
+
+            // Monthly Payouts Chart
+            new Chart(document.getElementById("monthlyPayoutsChart"), {
+                type: "line",
+                data: {
+                    labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09"],
+                    datasets: [
+                        {
+                            label: "Выплата (₽)",
+                            data: [21000.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 3137.0, 537025.0, 159000.0, 515255.0, 18585.0, 140000.0, 62275.0],
+                            borderColor: colors.primary,
+                            backgroundColor: colors.primary + "20",
+                            pointBackgroundColor: colors.primary,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                        {
+                            label: "Средняя выплата (₽)",
+                            data: [21000.0, 0, 0, 0, 0, 0, 0, 0, 0, 3137.0, 179008.33333333334, 39750.0, 128813.75, 18585.0, 46666.666666666664, 20758.333333333332],
+                            borderColor: colors.secondary,
+                            backgroundColor: colors.secondary + "20",
+                            pointBackgroundColor: colors.secondary,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                        },
+                    ],
+                },
+                options: { ...lineChartOptions, aspectRatio: 4 },
+            });
+
+            // Status Distribution Chart
+            new Chart(document.getElementById("statusChart"), {
+                type: "doughnut",
+                data: {
+                    labels: ["accepted", "duplicate", "informative", "pending", "rejected"],
+                    datasets: [
+                        {
+                            data: [22, 8, 1, 1, 1],
+                            backgroundColor: chartColors,
+                        },
+                    ],
+                },
+                options: doughnutChartOptions,
+            });
+
+            // Severity Distribution Chart
+            const severityDistributionLabels = ["critical", "high", "low", "medium"];
+            new Chart(document.getElementById("severityChart"), {
+                type: "doughnut",
+                data: {
+                    labels: severityDistributionLabels,
+                    datasets: [
+                        {
+                            data: [7, 6, 10, 10],
+                            backgroundColor: severityDistributionLabels.map(
+                                (label) => {
+                                    return severityToColor[label];
+                                },
+                            ),
+                        },
+                    ],
+                },
+                options: doughnutChartOptions,
+            });
+
+            // Platform Distribution Chart
+            new Chart(document.getElementById("platformChart"), {
+                type: "doughnut",
+                data: {
+                    labels: ["BI.ZONE", "Standoff365"],
+                    datasets: [
+                        {
+                            data: [14, 19],
+                            backgroundColor: chartColors,
+                        },
+                    ],
+                },
+                options: doughnutChartOptions,
+            });
+
+            // Top Programs Chart
+            new Chart(document.getElementById("topProgramsChart"), {
+                type: "bar",
+                data: {
+                    labels: ["VK WorkSpace", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 E", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 C", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 D", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 F", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 G", "VK Education", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 A", "VK HR Tek", "\u0410\u043b\u044c\u0444\u0430-\u0411\u0430\u043d\u043a"],
+                    datasets: [
+                        {
+                            label: "Отчеты",
+                            data: [7, 6, 4, 3, 3, 3, 2, 2, 1, 1],
+                            backgroundColor: colors.info,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: colors.border,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                    },
+                },
+            });
+
+            // Acceptance by Type Chart
+            new Chart(document.getElementById("acceptanceChart"), {
+                type: "bar",
+                data: {
+                    labels: ["private", "public"],
+                    datasets: [
+                        {
+                            label: "Принято",
+                            data: [15, 7],
+                            backgroundColor: colors.success,
+                        },
+                        {
+                            label: "Отклонено",
+                            data: [7, 4],
+                            backgroundColor: colors.danger,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: colors.textMuted,
+                                usePointStyle: true,
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            grid: {
+                                color: colors.border,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                    },
+                },
+            });
+
+            // Average Payout by Severity Chart
+            avgPayoutBySeverityLabels = ["critical", "high", "low", "medium"];
+            new Chart(document.getElementById("avgPayoutSeverityChart"), {
+                type: "bar",
+                data: {
+                    labels: avgPayoutBySeverityLabels,
+                    datasets: [
+                        {
+                            label: "Средняя выплата (₽)",
+                            data: [225906.25, 167500.0, 11183.56, 23400.0],
+                            backgroundColor: avgPayoutBySeverityLabels.map(
+                                (label) => {
+                                    return severityToColor[label];
+                                },
+                            ),
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: colors.border,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                    },
+                },
+            });
+
+            // Platform Activity Chart
+            new Chart(document.getElementById("platformActivityChart"), {
+                type: "bar",
+                data: {
+                    labels: ["BI.ZONE", "Standoff365"],
+                    datasets: [
+                        {
+                            label: "Отчеты",
+                            data: [14, 19],
+                            backgroundColor: colors.info,
+                            yAxisID: "y",
+                        },
+                        {
+                            label: "Доход (₽)",
+                            data: [1073210.0, 383067.0],
+                            backgroundColor: colors.success,
+                            yAxisID: "y1",
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: colors.textMuted,
+                                usePointStyle: true,
+                            },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                        y: {
+                            type: "linear",
+                            display: true,
+                            position: "left",
+                            grid: {
+                                color: colors.border,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                        y1: {
+                            type: "linear",
+                            display: true,
+                            position: "right",
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                    },
+                },
+            });
+
+            // Top Programs by Payout Chart
+            new Chart(document.getElementById("topProgramsPayoutChart"), {
+                type: "bar",
+                data: {
+                    labels: ["VK WorkSpace", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 E", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 F", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 D", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 A", "VK Education", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 C"],
+                    datasets: [
+                        {
+                            label: "Общая выплата (₽)",
+                            data: [810865.0, 322275.0, 140000.0, 134000.0, 25000.0, 21000.0, 3137.0],
+                            backgroundColor: colors.success,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: colors.border,
+                            },
+                            ticks: {
+                                color: colors.textMuted,
+                            },
+                        },
+                    },
+                },
+            });
+
+            // Payout by Severity Chart
+            payoutBySeverityLabels = ["critical", "high", "low", "medium"];
+            new Chart(document.getElementById("payoutSeverityChart"), {
+                type: "doughnut",
+                data: {
+                    labels: payoutBySeverityLabels,
+                    datasets: [
+                        {
+                            data: [903625.0, 335000.0, 100652.0, 117000.0],
+                            backgroundColor: payoutBySeverityLabels.map(
+                                (label) => {
+                                    return severityToColor[label];
+                                },
+                            ),
+                        },
+                    ],
+                },
+                options: doughnutChartOptions,
+            });
+        </script>
+    </body>
+</html>
