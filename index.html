@@ -1,8 +1,5 @@
 <!doctype html>
 <html lang="ru">
-    
-        
-    
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,26 +34,22 @@
             <header class="mb-8">
                 <div class="flex items-center justify-center mb-6">
                     <div class="flex items-center space-x-4">
-                        
                         <img
                             src="static/avatar.png"
                             alt="avatar"
                             class="w-24 h-24 rounded-full border-2 border-gray-300"
                         />
-                        
+
                         <div>
                             <h1 class="text-4xl font-semibold">
                                 Bug Bounty Stats
                             </h1>
-                            <span class="text-xl text-gray-600">
-                                @vladpi
-                            </span>
+                            <span class="text-xl text-gray-600"> @vladpi </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex justify-center space-x-6 mb-4">
-                    
                     <a
                         href="https://road_to_ipoteka.t.me"
                         target="_blank"
@@ -65,8 +58,7 @@
                         <img src="static/telegram.ico" class="w-5 h-5" />
                         <span>Telegram</span>
                     </a>
-                    
-                    
+
                     <a
                         href="https://bugbounty.bi.zone/profile/vladpi/hackactivity"
                         target="_blank"
@@ -75,8 +67,7 @@
                         <img src="static/bizone.ico" class="w-5 h-5" />
                         <span>BI.ZONE</span>
                     </a>
-                    
-                    
+
                     <a
                         href="https://standoff365.com/profile/vladpi/"
                         target="_blank"
@@ -85,7 +76,6 @@
                         <img src="static/standoff365.ico" class="w-5 h-5" />
                         <span>Standoff365</span>
                     </a>
-                    
                 </div>
             </header>
 
@@ -108,9 +98,7 @@
                     <h3 class="text-sm font-medium text-gray-500 uppercase">
                         Всего отчетов
                     </h3>
-                    <p class="text-2xl font-semibold text-sky-600">
-                        33
-                    </p>
+                    <p class="text-2xl font-semibold text-sky-600">33</p>
                 </div>
                 <div
                     class="bg-white p-6 rounded-lg shadow border-l-4 border-sky-500"
@@ -118,9 +106,7 @@
                     <h3 class="text-sm font-medium text-gray-500 uppercase">
                         Принято
                     </h3>
-                    <p class="text-2xl font-semibold text-sky-600">
-                        22
-                    </p>
+                    <p class="text-2xl font-semibold text-sky-600">22</p>
                 </div>
                 <div
                     class="bg-white p-6 rounded-lg shadow border-l-4 border-sky-500"
@@ -128,9 +114,7 @@
                     <h3 class="text-sm font-medium text-gray-500 uppercase">
                         % принятых
                     </h3>
-                    <p class="text-2xl font-semibold text-sky-600">
-                        66%
-                    </p>
+                    <p class="text-2xl font-semibold text-sky-600">66%</p>
                 </div>
             </div>
 
@@ -214,7 +198,13 @@
 
             <footer>
                 <p class="text-right text-gray-400">
-                    Сгенерировано при помощи <a class="hover:underline text-blue-400" href="https://github.com/vladpi/bugbounty-stats">Bug Bounty Stats</a> – 09.10.2025
+                    Сгенерировано при помощи
+                    <a
+                        class="hover:underline text-blue-400"
+                        href="https://github.com/vladpi/bugbounty-stats"
+                        >Bug Bounty Stats</a
+                    >
+                    – 09.10.2025
                 </p>
             </footer>
         </div>
@@ -311,11 +301,30 @@
             u = new Chart(document.getElementById("monthlyReportsChart"), {
                 type: "line",
                 data: {
-                    labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09"],
+                    labels: [
+                        "2024-06",
+                        "2024-07",
+                        "2024-08",
+                        "2024-09",
+                        "2024-10",
+                        "2024-11",
+                        "2024-12",
+                        "2025-01",
+                        "2025-02",
+                        "2025-03",
+                        "2025-04",
+                        "2025-05",
+                        "2025-06",
+                        "2025-07",
+                        "2025-08",
+                        "2025-09",
+                    ],
                     datasets: [
                         {
                             label: "Отчеты",
-                            data: [1, 3, 1, 0, 0, 0, 0, 0, 0, 3, 6, 5, 5, 2, 4, 3],
+                            data: [
+                                1, 3, 1, 0, 0, 0, 0, 0, 0, 3, 6, 5, 5, 2, 4, 3,
+                            ],
                             borderColor: colors.primary,
                             backgroundColor: colors.primary + "20",
                             pointBackgroundColor: colors.primary,
@@ -332,11 +341,30 @@
             new Chart(document.getElementById("monthlyProgramsChart"), {
                 type: "line",
                 data: {
-                    labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09"],
+                    labels: [
+                        "2024-06",
+                        "2024-07",
+                        "2024-08",
+                        "2024-09",
+                        "2024-10",
+                        "2024-11",
+                        "2024-12",
+                        "2025-01",
+                        "2025-02",
+                        "2025-03",
+                        "2025-04",
+                        "2025-05",
+                        "2025-06",
+                        "2025-07",
+                        "2025-08",
+                        "2025-09",
+                    ],
                     datasets: [
                         {
                             label: "Уникальные программы",
-                            data: [1, 2, 1, 0, 0, 0, 0, 0, 0, 2, 3, 2, 2, 2, 2, 1],
+                            data: [
+                                1, 2, 1, 0, 0, 0, 0, 0, 0, 2, 3, 2, 2, 2, 2, 1,
+                            ],
                             borderColor: colors.primary,
                             backgroundColor: colors.primary + "20",
                             pointBackgroundColor: colors.primary,
@@ -353,11 +381,32 @@
             new Chart(document.getElementById("monthlyPayoutsChart"), {
                 type: "line",
                 data: {
-                    labels: ["2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09"],
+                    labels: [
+                        "2024-06",
+                        "2024-07",
+                        "2024-08",
+                        "2024-09",
+                        "2024-10",
+                        "2024-11",
+                        "2024-12",
+                        "2025-01",
+                        "2025-02",
+                        "2025-03",
+                        "2025-04",
+                        "2025-05",
+                        "2025-06",
+                        "2025-07",
+                        "2025-08",
+                        "2025-09",
+                    ],
                     datasets: [
                         {
                             label: "Выплата (₽)",
-                            data: [21000.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 3137.0, 537025.0, 159000.0, 515255.0, 18585.0, 140000.0, 62275.0],
+                            data: [
+                                21000.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 3137.0,
+                                537025.0, 159000.0, 515255.0, 18585.0, 140000.0,
+                                62275.0,
+                            ],
                             borderColor: colors.primary,
                             backgroundColor: colors.primary + "20",
                             pointBackgroundColor: colors.primary,
@@ -367,7 +416,11 @@
                         },
                         {
                             label: "Средняя выплата (₽)",
-                            data: [21000.0, 0, 0, 0, 0, 0, 0, 0, 0, 3137.0, 179008.33333333334, 39750.0, 128813.75, 18585.0, 46666.666666666664, 20758.333333333332],
+                            data: [
+                                21000.0, 0, 0, 0, 0, 0, 0, 0, 0, 3137.0,
+                                179008.33333333334, 39750.0, 128813.75, 18585.0,
+                                46666.666666666664, 20758.333333333332,
+                            ],
                             borderColor: colors.secondary,
                             backgroundColor: colors.secondary + "20",
                             pointBackgroundColor: colors.secondary,
@@ -384,7 +437,13 @@
             new Chart(document.getElementById("statusChart"), {
                 type: "doughnut",
                 data: {
-                    labels: ["accepted", "duplicate", "informative", "pending", "rejected"],
+                    labels: [
+                        "accepted",
+                        "duplicate",
+                        "informative",
+                        "pending",
+                        "rejected",
+                    ],
                     datasets: [
                         {
                             data: [22, 8, 1, 1, 1],
@@ -396,7 +455,12 @@
             });
 
             // Severity Distribution Chart
-            const severityDistributionLabels = ["critical", "high", "low", "medium"];
+            const severityDistributionLabels = [
+                "critical",
+                "high",
+                "low",
+                "medium",
+            ];
             new Chart(document.getElementById("severityChart"), {
                 type: "doughnut",
                 data: {
@@ -434,7 +498,18 @@
             new Chart(document.getElementById("topProgramsChart"), {
                 type: "bar",
                 data: {
-                    labels: ["VK WorkSpace", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 E", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 C", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 D", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 F", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 G", "VK Education", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 A", "VK HR Tek", "\u0410\u043b\u044c\u0444\u0430-\u0411\u0430\u043d\u043a"],
+                    labels: [
+                        "VK WorkSpace",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 E",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 C",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 D",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 F",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 G",
+                        "VK Education",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 A",
+                        "VK HR Tek",
+                        "\u0410\u043b\u044c\u0444\u0430-\u0411\u0430\u043d\u043a",
+                    ],
                     datasets: [
                         {
                             label: "Отчеты",
@@ -640,11 +715,22 @@
             new Chart(document.getElementById("topProgramsPayoutChart"), {
                 type: "bar",
                 data: {
-                    labels: ["VK WorkSpace", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 E", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 F", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 D", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 A", "VK Education", "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 C"],
+                    labels: [
+                        "VK WorkSpace",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 E",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 F",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 D",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 A",
+                        "VK Education",
+                        "\u041f\u0440\u0438\u0432\u0430\u0442\u043d\u0430\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u0430 C",
+                    ],
                     datasets: [
                         {
                             label: "Общая выплата (₽)",
-                            data: [810865.0, 322275.0, 140000.0, 134000.0, 25000.0, 21000.0, 3137.0],
+                            data: [
+                                810865.0, 322275.0, 140000.0, 134000.0, 25000.0,
+                                21000.0, 3137.0,
+                            ],
                             backgroundColor: colors.success,
                         },
                     ],
@@ -699,4 +785,38 @@
             });
         </script>
     </body>
+
+    <!-- Top100 (Kraken) Counter -->
+    <script>
+        (function (w, d, c) {
+            (w[c] = w[c] || []).push(function () {
+                var options = {
+                    project: 7749519,
+                };
+                try {
+                    w.top100Counter = new top100(options);
+                } catch (e) {}
+            });
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () {
+                    n.parentNode.insertBefore(s, n);
+                };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else {
+                f();
+            }
+        })(window, document, "_top100q");
+    </script>
+    <noscript>
+        <img src="//counter.rambler.ru/top100.cnt?pid=7749519" alt="Топ-100" />
+    </noscript>
+    <!-- END Top100 (Kraken) Counter -->
 </html>
